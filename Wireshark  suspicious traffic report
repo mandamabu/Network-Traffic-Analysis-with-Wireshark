@@ -1,0 +1,24 @@
+Wireshark Capture analysis 
+	HTTP: Traffic was generated using a simple while-loop on the Kali host, issuing repeated HTTP GET requests to the root path of the target server at a high, automated rate.
+Total packets observed - 50
+Unusual patterns identified
+1.The capture recorded 50 HTTP transactions within approximately 30 seconds.Every transaction followed an identical pattern:a GET request from the internal host followed immediately by a 200 OK TEXT/HTML response from the external server. 
+2.Request packet size and Response packet size 136bytes and 376bytes respectively for each packet(uniform packet sizes)
+3.Unencrypted HTTP to external public IP on all packets.
+4.Requests occur at a near-perfect regular speed interval across capture window. Human browsing never produces this level of regularity. This is an indicator of automated or scripted comunication, consistent with C2 malware heartbeating  	
+      DNS: Traffic analyzed was a sample DNS traffic capture gotten from wiki.wireshark.org
+Total packets observed - 38
+Unusual patterns observed
+1.On packets 28,30,31,32,33,34,35,36,37and38 it was observed that a second host computer 192.168.170.56 sent DNS questions to an outside server (217.13.4.24) asking for the locaton of internal company computers. The questions contained internal network details. Private network information should never be sent to the internet.
+2.On packets 35,36,37and38 the computer 192.168.170.56 asked for an address two seperate times(35 and 37) using two different ID numbers, sending the same queston with a fresh ID immediately after getting 'not found' which can be a sign that something is trying to find a way to trick the DNS system into giving a fake answer(DNS spoofing).Generally the host is behaving unusually.
+3.On packets 23and24 the computer 192.168.170.8 sent a special DNS request asking for all available records for www.isc.org using a query type called ANY. The server replied with a large response. ANY queries are almost never used in normal browsing, they are mostly used by attackers to trick servers into sending large responses to a victims system in order to overwhelm it( DNS amplification attack ).
+       ARP: Traffic analyzed was a sample ARP traffic capture gotten from wiki.wireshark.org
+Total packets observed - 622
+Unusual patterns observed
+1. On packets 1-622 one device sent all the ARP requests in under 29 seconds, asking 'Who has this IP' for different addresses across different networks. That is only possible with an automated tool or a malware,the pattern is likely an ARP storm flooding the network with broadcast traffic to slow down devices on the network or discover targets before an attack.        
+2. On packets 1-622 the packets all came from the same physical device(Same MAC address) but the device claimed to be different IP addresses. Using different source IPs from one MAC address is IP spoofing.
+3.  On each packet request sent, the device received zero replies. Normal devices stop and wait after each ARP request, not waiting for replies and continuing the flood is a sign that the device is running a blind network sweep. This is likely the reconnaissance stage of an atack. 
+
+
+
+
