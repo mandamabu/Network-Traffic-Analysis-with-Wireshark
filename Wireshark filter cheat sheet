@@ -1,0 +1,14 @@
+http: Displays all HTTP traffic
+dns: Displays all DNS queries and responses
+arp: Displays all ARP packets
+tcp: Shows all TCP traffic
+udp: Shows all UDP traffic
+icmp: Displays ping and ICMP traffic
+ip.addr == "specifc ip address": Shows traffic to/from a specific IP address
+tcp.port == 80: Shows traffic using HTTP port 80
+tcp.port == 443: Shows HTTPS traffic
+dns.flags.response == 0: Displays only DNS requests
+dns.flags.response == 1: Displays only DNS responses
+http.request.method == "GET": Shows HTTP GET requests only
+arp.opcode == 1: Shows ARP Requests
+arp.opcode == 2: Shows ARP Replies
