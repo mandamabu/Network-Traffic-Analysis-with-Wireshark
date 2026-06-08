@@ -15,7 +15,7 @@ A VirtualBox networking mode that creates a private network in a controlled envi
 1. Configured a Host-Only Adapter in VirtualBox to create an isolated network environment.
 2. Started packet capture on the host-only network interface (eth0).
 3. Generated network traffic for HTTP filter and downloaded sample captures for DNS and ARP anlysis.
-4. Examined HTTP GET requests and identified the request method, Host header, User-Agent, and response code.
+4. Examined HTTP GET requests and identified the Request method, Host header, User-Agent, and response code.
 5. Analyzed DNS queries and responses to observe domain name resolution.
 6. Investigated ARP Requests and Replies, noting source and destination MAC addresses.
 7. Used tcpdump from the command line to capture network traffic and save it as a PCAP file.
